@@ -1,8 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 
 class Greeting extends React.Component{
   constructor(props){
     super(props);
+    this.handleLogout = this.handleLogout.bind(this);
+  }
+
+  handleLogout(e){
+    e.preventDefault();
+    this.props.logout();
   }
 
   render(){
@@ -11,13 +19,13 @@ class Greeting extends React.Component{
        logged = (
         <ul className="greeting">
           <li><p>Welcome, {this.props.currentUser.username}</p></li>
-          <li><button>LogOut</button></li>
+          <li><button onClick={this.handleLogout} >LogOut</button></li>
         </ul>
       );
     } else {
        logged = (<ul className="greeting">
-        <li><button>signup</button></li>
-        <li><button>login</button></li>
+        <li><Link to="/signup"><button>signup</button></Link></li>
+        <li><Link to="/signin"><button>login</button></Link></li>
       </ul>);
     }
     return(
